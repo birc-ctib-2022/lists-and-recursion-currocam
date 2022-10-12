@@ -146,7 +146,15 @@ def rev(x: List[T]) -> List[T]:
     >>> rev(L(1, L(2, L(3, None))))
     L(3, L(2, L(1, None)))
     """
-    ...
+    if x is None: return x
+    def inner_rev(x, last = None):
+        if x.tail is None: return L(x.head, last)
+        return inner_rev(x.tail, L(x.head, last))
+    return inner_rev(x)
+
+
+    
+        
 
 
 # Tail-recursive versions ###########################################
