@@ -95,19 +95,19 @@ def drop(x: List[T], k: int) -> List[T]:
     if x is None: return x
     return x if k <= 0 else drop(x.tail, k-1)
 
-
 def keep(x: List[T], k: int) -> List[T]:
     """
     Keep only the first k elements.
 
     >>> x = L(1, L(2, L(3, L(4, None))))
-    >>> keep(x, 0) # returns None but doesn't print
+    >>> keep(x, 0)
+    >>> # returns None but doesn't print
     >>> keep(x, 1)
     L(1, None)
     >>> keep(x, 3)
     L(1, L(2, L(3, None)))
-    """
-    ...
+    """       
+    return None if k <= 0 else L(x.head, keep(x.tail, k-1))
 
 
 def concat(x: List[T], y: List[T]) -> List[T]:
