@@ -131,7 +131,12 @@ def append(x: List[T], e: T) -> List[T]:
     >>> append(L(1, L(2, None)), 3)
     L(1, L(2, L(3, None)))
     """
-    ...
+    if x is None:
+        return L(e, None)
+    elif x.tail is None: 
+        return L(x.head, L(e, None))
+    else: 
+        return L(x.head, append(x.tail, e))
 
 
 def rev(x: List[T]) -> List[T]:
