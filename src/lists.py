@@ -117,8 +117,12 @@ def concat(x: List[T], y: List[T]) -> List[T]:
     >>> concat(L(1, L(2, None)), L(3, L(4, None)))
     L(1, L(2, L(3, L(4, None))))
     """
-    ...
-
+    if x is None: 
+        return y
+    elif x.tail is None: 
+        return L(x.head, y)
+    else: 
+        return L(x.head, concat(x.tail, y))
 
 def append(x: List[T], e: T) -> List[T]:
     """
