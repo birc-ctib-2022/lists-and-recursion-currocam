@@ -180,8 +180,9 @@ def add_tr(x: List[int], acc: int = 0) -> int:
     >>> add_tr(L(1, L(2, L(3, None))))
     6
     """
-    return acc if x is None else add_tr(x.tail, acc + x.head)
-
+    match x:
+        case None: return acc
+        case L(head, tail): return add_tr(tail, acc + head)
 
 def contains_tr(x: List[T], e: T) -> bool:
     """
