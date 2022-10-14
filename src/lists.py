@@ -224,8 +224,8 @@ def keep_tr(x: List[T], k: int) -> List[T]:
     """
     def innner_keep_tr(x, k, acc = None):
         match (k, x):
-            case(0, _): return rev(acc)
-            case (_, None): return rev(acc)
+            case(0, _): return rev_tr(acc)
+            case (_, None): return rev_tr(acc)
             case(k, L(head, tail)): return innner_keep_tr(tail, k-1, L(head, acc))
     return innner_keep_tr(x, k)
     
@@ -312,8 +312,10 @@ def contains_loop(x: List[T], e: T) -> bool:
     >>> contains_loop(L(1, L(2, L(3, None))), 2)
     True
     """
-    ...
-
+    while x is not None:
+        if x.head == e: return True 
+        x = x.tail
+    return False
 
 def drop_loop(x: List[T], k: int) -> List[T]:
     """
@@ -327,7 +329,10 @@ def drop_loop(x: List[T], k: int) -> List[T]:
     >>> drop_loop(x, 3)
     L(4, None)
     """
-    ...
+    while x and k > 0:
+        k -= 1
+        x = x.tail
+    return x
 
 
 def keep_loop(x: List[T], k: int) -> List[T]:
@@ -341,7 +346,15 @@ def keep_loop(x: List[T], k: int) -> List[T]:
     >>> keep_loop(x, 3)
     L(1, L(2, L(3, None)))
     """
-    ...
+    acc: List[T] = None
+    while x is not None and k > 0:
+        x, k, acc = x.tail, k-1, L(x.head, acc)
+    return rev_loop(acc)
+
+def _flip_loop(x: List[T], y: List[T]) -> List[T]:
+    while y is not None:
+        x, y = L(y.head, x), y.tail 
+    return x
 
 
 def concat_loop(x: List[T], y: List[T]) -> List[T]:
@@ -351,7 +364,7 @@ def concat_loop(x: List[T], y: List[T]) -> List[T]:
     >>> concat_loop(L(1, L(2, None)), L(3, L(4, None)))
     L(1, L(2, L(3, L(4, None))))
     """
-    ...
+    return _flip_loop(y, rev_loop(x))
 
 
 def append_loop(x: List[T], e: T) -> List[T]:
@@ -361,7 +374,7 @@ def append_loop(x: List[T], e: T) -> List[T]:
     >>> append_loop(L(1, L(2, None)), 3)
     L(1, L(2, L(3, None)))
     """
-    ...
+    return concat_loop(x, L(e, None))
 
 
 def rev_loop(x: List[T]) -> List[T]:
@@ -371,4 +384,4 @@ def rev_loop(x: List[T]) -> List[T]:
     >>> rev_loop(L(1, L(2, L(3, None))))
     L(3, L(2, L(1, None)))
     """
-    ...
+    return _flip_loop(None, x)

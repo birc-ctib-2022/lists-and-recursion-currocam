@@ -3,8 +3,8 @@
 # names that start with test_
 
 from lists import (
-    L, List,
-    length, add, contains, drop, keep, concat, append, rev
+    L, List, append_tr, concat_tr, contains_loop, drop_loop, keep_loop, keep_tr,
+    length, add, contains, drop, keep, concat, append, length_tr, rev, rev_tr
 )
 from typing import TypeVar, Sequence
 
@@ -43,6 +43,7 @@ def test_length() -> None:
     for i in range(10):
         lst = from_python_list(list(range(i)))
         assert length(lst) == i
+        assert length_tr(lst) == i
 
 
 def test_add() -> None:
@@ -75,6 +76,7 @@ def test_keep() -> None:
     y = from_python_list(x)
     for i in range(10):
         assert x[:i] == to_python_list(keep(y, i))
+        assert x[:i] == to_python_list(keep_tr(y, i))
 
 
 def test_concat() -> None:
@@ -107,14 +109,23 @@ def test_rev() -> None:
         assert to_python_list(rev_tr(y)) == x[::-1]
 
 
-def test_missing() -> None:
-    """
-    Remind you that you might want to add some tests.
+def test_contains_loop():
+    """Test that loop version of contains works"""
+    x = list(range(1,  1500, 1))
+    y = from_python_list(x)
+    for i in range(1000, 1100, 10):
+        assert (i in x) == contains_loop(y, i)
 
-    The existing tests only test the direct recursive functions.
-    You should also write tests for the tail-recursive and the
-    looping versions, or alternatively add those functions to
-    the existing ones. If we don't test, we can be reasonably
-    sure that our code doesn't work.
-    """
-    assert False, "If you want more tests you have to write them."
+def test_drop() -> None:
+    """Test that the drop loop function works."""
+    x = list(range(1,  1500, 1))
+    y = from_python_list(x)
+    for i in range(1000, 1200, 10):
+        assert x[i:] == to_python_list(drop_loop(y, i))
+
+def test_keep_loop() -> None:
+    """Test that the keep loop function works."""
+    x = list(range(2000))
+    y = from_python_list(x)
+    for i in range(1000, 1100, 10):
+        assert x[:i] == to_python_list(keep_loop(y, i))
