@@ -222,7 +222,13 @@ def keep_tr(x: List[T], k: int) -> List[T]:
     >>> keep_tr(x, 3)
     L(1, L(2, L(3, None)))
     """
-    ...
+    def innner_keep_tr(x, k, acc = None):
+        match (k, x):
+            case(0, _): return rev(acc)
+            case (_, None): return rev(acc)
+            case(k, L(head, tail)): return innner_keep_tr(tail, k-1, L(head, acc))
+    return innner_keep_tr(x, k)
+    
 
 
 def concat_tr(x: List[T], y: List[T]) -> List[T]:
