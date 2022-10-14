@@ -74,8 +74,10 @@ def contains(x: List[T], e: T) -> bool:
     >>> contains(L(1, L(2, L(3, None))), 2)
     True
     """
-    if x is None: return False
-    return True if x.head == e else contains(x.tail, e)
+    match x:
+        case None: return False
+        case L(head, _ ) if head == e: return True
+        case L(_, tail): return contains(tail, e)
 
     
 
