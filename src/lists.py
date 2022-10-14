@@ -61,8 +61,9 @@ def add(x: List[int]) -> int:
     >>> add(L(1, L(2, L(3, None))))
     6
     """
-    return 0 if x is None else x.head + add(x.tail)
-
+    match x:
+        case None: return 0
+        case L(val, tail): return val + add(tail)
 
 def contains(x: List[T], e: T) -> bool:
     """
