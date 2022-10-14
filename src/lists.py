@@ -165,8 +165,9 @@ def length_tr(x: List[T], acc: int = 0) -> int:
     >>> length_tr(L(1, L(2, L(3, None))))
     3
     """
-    return acc if x is None else length_tr(x.tail, acc + 1)
-
+    match x:
+        case None: return acc
+        case L(_, tail): return length_tr(tail, acc + 1)
 
 def add_tr(x: List[int], acc: int = 0) -> int:
     """
