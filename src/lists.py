@@ -193,7 +193,7 @@ def contains_tr(x: List[T], e: T) -> bool:
     >>> contains_tr(L(1, L(2, L(3, None))), 2)
     True
     """
-    ...
+    return contains(x, e)
 
 
 def drop_tr(x: List[T], k: int) -> List[T]:
