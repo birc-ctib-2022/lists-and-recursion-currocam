@@ -113,8 +113,10 @@ def keep(x: List[T], k: int) -> List[T]:
     >>> keep(x, 3)
     L(1, L(2, L(3, None)))
     """       
-    if x is None: return None
-    return None if k <= 0 else L(x.head, keep(x.tail, k-1))
+    match (k, x):
+        case (0, x): return None
+        case (_, None): return None
+        case (k, L(head, tail)): return L(head, keep(tail, k-1))
 
 
 def concat(x: List[T], y: List[T]) -> List[T]:
