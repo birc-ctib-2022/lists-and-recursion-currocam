@@ -238,7 +238,7 @@ def concat_tr(x: List[T], y: List[T]) -> List[T]:
     >>> concat_tr(L(1, L(2, None)), L(3, L(4, None)))
     L(1, L(2, L(3, L(4, None))))
     """
-    ...
+    return _flip(y, rev_tr(x))
 
 
 def append_tr(x: List[T], e: T) -> List[T]:
@@ -248,8 +248,12 @@ def append_tr(x: List[T], e: T) -> List[T]:
     >>> append_tr(L(1, L(2, None)), 3)
     L(1, L(2, L(3, None)))
     """
-    ...
+    return concat_tr(x, L(e, None))
 
+def _flip(x: List[T], y: List[T]) -> List[T]:
+    match y: 
+        case None: return x
+        case L(head, tail): return _flip(L(head, x), tail)
 
 def rev_tr(x: List[T]) -> List[T]:
     """
@@ -258,11 +262,7 @@ def rev_tr(x: List[T]) -> List[T]:
     >>> rev_tr(L(1, L(2, L(3, None))))
     L(3, L(2, L(1, None)))
     """
-    def inner_rev_tr(x, acc = None):
-        match x:
-            case None: return acc
-            case L(head, tail): return inner_rev_tr(tail, L(head, acc))
-    return inner_rev_tr(x)
+    return _flip(None, x)
 
 
 # Loop versions ###########################################

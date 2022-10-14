@@ -83,6 +83,7 @@ def test_concat() -> None:
         x = list(range(i))
         y = from_python_list(x)
         assert to_python_list(concat(y, y)) == x + x
+        assert to_python_list(concat_tr(y, y)) == x + x
 
 
 def test_append() -> None:
