@@ -208,7 +208,7 @@ def drop_tr(x: List[T], k: int) -> List[T]:
     >>> drop_tr(x, 3)
     L(4, None)
     """
-    ...
+    return drop(x, k)
 
 
 def keep_tr(x: List[T], k: int) -> List[T]:
