@@ -113,6 +113,7 @@ def keep(x: List[T], k: int) -> List[T]:
     >>> keep(x, 3)
     L(1, L(2, L(3, None)))
     """       
+    if x is None: return None
     return None if k <= 0 else L(x.head, keep(x.tail, k-1))
 
 
