@@ -103,6 +103,7 @@ def test_rev() -> None:
         x.append(i)
         y = append(y, i)
         assert to_python_list(rev(y)) == x[::-1]
+        assert to_python_list(rev_tr(y)) == x[::-1]
 
 
 def test_missing() -> None:

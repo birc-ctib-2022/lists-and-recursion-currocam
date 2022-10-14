@@ -258,7 +258,11 @@ def rev_tr(x: List[T]) -> List[T]:
     >>> rev_tr(L(1, L(2, L(3, None))))
     L(3, L(2, L(1, None)))
     """
-    ...
+    def inner_rev_tr(x, acc = None):
+        match x:
+            case None: return acc
+            case L(head, tail): return inner_rev_tr(tail, L(head, acc))
+    return inner_rev_tr(x)
 
 
 # Loop versions ###########################################
