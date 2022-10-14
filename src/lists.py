@@ -96,8 +96,10 @@ def drop(x: List[T], k: int) -> List[T]:
     >>> drop(x, 4)
     >>> drop(x, 5)
     """
-    if x is None: return x
-    return x if k <= 0 else drop(x.tail, k-1)
+    match (k, x):
+        case (0, x): return x
+        case (_, None): return None
+        case (k, L(_, tail)): return drop(tail, k-1)
 
 def keep(x: List[T], k: int) -> List[T]:
     """
