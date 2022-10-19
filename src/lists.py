@@ -1,9 +1,10 @@
 """Linked lists."""
 
 from __future__ import annotations
-from http.client import FOUND
-from typing import TypeVar, Generic, Optional
+
 from dataclasses import dataclass
+from http.client import FOUND
+from typing import Generic, Optional, TypeVar
 
 T = TypeVar('T')
 
